@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     Character
         .find()
         .then(characters => {
-            res.status(200).json(characters.map(char => char.apiRepr()))
+            res.status(200).json(characters.map(char => char.apiRepr())); 
         })
 }); 
 
@@ -25,6 +25,14 @@ router.post('/', jsonParser, (req, res) => {
             res.status(201).json(character.apiRepr()); 
         })
         .catch(err => console.log(err)); 
+})
+
+router.delete('/:id', (req, res) => {
+    Character
+        .findByIdAndRemove(req.params.id)
+        .then(
+            res.status(200).json({message: 'Item deleted'})
+        )
 })
 
 module.exports = router; 

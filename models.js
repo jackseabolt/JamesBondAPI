@@ -11,7 +11,8 @@ CharacterSchema.methods.apiRepr = function(){
     return {
         firstName: this.firstName, 
         lastName: this.lastName, 
-        age: this.age || ''
+        age: this.age || '', 
+        id: this._id
     }
 }
 

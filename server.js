@@ -8,7 +8,15 @@ const characterRouter = require('./routes/characterRouter');
 const Character = require('./models'); 
 let server; 
 
-app.use('/james-bond-api/characters/', characterRouter);  
+app.use('/james-bond-api/characters/', characterRouter); 
+app.use(express.static('public'));  
+
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Header", "content-type");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, DELETE"); 
+    next(); 
+})
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT){
     return new Promise((resolve, reject) => {
