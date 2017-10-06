@@ -1,9 +1,12 @@
 const express = require('express'); 
 const mongoose = require('mongoose'); 
+const passport = require('passport'); 
 const router = express.Router(); 
 const Character = require('../models'); 
 const bodyParser = require('body-parser'); 
 const jsonParser = bodyParser.json(); 
+
+const jwtAuth = passport.authenticate('jwt', {session: false}); 
 
 router.get('/', (req, res) => {
     Character
@@ -13,7 +16,7 @@ router.get('/', (req, res) => {
         })
 }); 
 
-router.post('/', jsonParser, (req, res) => {
+router.post('/', jsonParser, jwtAuth, (req, res) => {
     newChar = {
         firstName: req.body.firstName, 
         lastName: req.body.lastName, 
@@ -27,7 +30,7 @@ router.post('/', jsonParser, (req, res) => {
         .catch(err => console.log(err)); 
 })
 
-router.put('/:id', jsonParser, (req, res) => {
+router.put('/:id', jsonParser, jwtAuth, (req, res) => {
     updatedChar = {};
     const updatableFields = ['firstName', 'lastName', 'age']; 
     updatableFields.forEach(field => {
@@ -41,7 +44,7 @@ router.put('/:id', jsonParser, (req, res) => {
         .catch(err => console.error(err)); 
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', jwtAuth, (req, res) => {
     Character
         .findByIdAndRemove(req.params.id)
         .then(
