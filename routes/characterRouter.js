@@ -27,6 +27,20 @@ router.post('/', jsonParser, (req, res) => {
         .catch(err => console.log(err)); 
 })
 
+router.put('/:id', jsonParser, (req, res) => {
+    updatedChar = {};
+    const updatableFields = ['firstName', 'lastName', 'age']; 
+    updatableFields.forEach(field => {
+        if(field in req.body){
+            updatedChar[field] = req.body[field];
+        }
+    });
+    Character
+        .findByIdAndUpdate(req.params.id, {$set: updatedChar})
+        .then(char => res.status(204).json(res.body))
+        .catch(err => console.error(err)); 
+})
+
 router.delete('/:id', (req, res) => {
     Character
         .findByIdAndRemove(req.params.id)

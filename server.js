@@ -3,12 +3,21 @@
 const mongoose = require('mongoose'); 
 const express = require('express'); 
 const app = express(); 
+const {basicStrategy, jwtStrategy} = require('./strategies/strategies'); 
+const passport = require('passport'); 
 const {DATABASE_URL, PORT} = require('./config')
 const characterRouter = require('./routes/characterRouter'); 
+const authRouter = require('./routes/authRouter'); 
+const userRouter = require('./routes/userRouter'); 
 const Character = require('./models'); 
 let server; 
 
+passport.use(basicStrategy); 
+passport.use(jwtStrategy); 
+
 app.use('/james-bond-api/characters/', characterRouter); 
+app.use('/login/', authRouter);
+app.use('/users/', userRouter);  
 app.use(express.static('public'));  
 
 app.use(function(req, res, next){
