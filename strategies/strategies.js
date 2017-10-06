@@ -2,13 +2,12 @@
 
 const { BasicStrategy } = require('passport-http'); 
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
-
+require('dotenv').config();
 const { User } = require('../models/userModel'); 
 const { JWT_SECRET } = require('../config'); 
 
-console.log(JWT_SECRET, 'THIS IS THE JWT_SECRET')
 
-const basicStrategy = new BasicStrategy((username, password) => {
+const basicStrategy = new BasicStrategy((username, password, callback) => {
     let user; 
     User
         .findOne({ username: username })
@@ -32,7 +31,6 @@ const basicStrategy = new BasicStrategy((username, password) => {
             return callback(null, user); 
         })
         .catch(err => {
-            console.log("HELLO")
             if(err.reason === 'Login Error') {
                 return callback(null, false, err)
             }

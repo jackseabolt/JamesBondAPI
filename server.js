@@ -10,6 +10,7 @@ const characterRouter = require('./routes/characterRouter');
 const authRouter = require('./routes/authRouter'); 
 const userRouter = require('./routes/userRouter'); 
 const Character = require('./models'); 
+require('dotenv').config();
 let server; 
 
 passport.use(basicStrategy); 
