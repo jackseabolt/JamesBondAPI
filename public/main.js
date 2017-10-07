@@ -1,7 +1,5 @@
 'use strict'; 
 
-
-
 function handleFormSubmit(){ 
     $('#js-form').on('submit', (event) => {
         event.preventDefault()
@@ -21,7 +19,7 @@ function displayData(data){
     data.forEach(character => {
         dataArray.push(
             `<div class="character-container">
-                <h3>${character.firstName} ${character.lastName}</h3>
+                <h5>${character.firstName} ${character.lastName}</h5>
             </div>`
         ); 
     }); 
