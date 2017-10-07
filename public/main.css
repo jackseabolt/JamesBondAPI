@@ -1,0 +1,9 @@
+.main-area {
+    width: 70%; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.main-area h1 {
+    text-align: center; 
+}
