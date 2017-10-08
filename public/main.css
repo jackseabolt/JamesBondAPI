@@ -11,3 +11,21 @@ body {
 .main-area h1 {
     text-align: center; 
 }
+
+.input {
+    padding: 6px 8px; 
+    border: 1px solid gray;
+    border-radius: 4px; 
+    width: 30%; 
+    font-size: 12px; 
+}
+
+.button {
+    padding: 7px 15px; 
+    border: 0px; 
+    border-radius: 4px; 
+    background-color: black; 
+    color: white; 
+    font-size: 12px; 
+
+}
